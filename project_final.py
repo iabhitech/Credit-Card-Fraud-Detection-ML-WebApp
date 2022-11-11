@@ -14,7 +14,7 @@ from sklearn.utils import shuffle
 # %matplotlib inline
 
 
-data=pd.read_csv('creditcard.csv')
+data=pd.read_csv('dataset/creditcard.csv')
 
 sns.distplot(data['Amount'])
 
@@ -23,8 +23,8 @@ sns.distplot(data['Time'])
 data.hist(figsize=(20,20))
 plt.show()
 
-sns.jointplot(x= 'Time', y= 'Amount', data= d)
 d=data
+sns.jointplot(x= 'Time', y= 'Amount', data= d)
 class0 = d[d['Class']==0]
 
 len(class0)
@@ -38,8 +38,6 @@ temp = shuffle(class0)
 
 d1 = temp.iloc[:2000,:]
 
-d1
-
 frames = [d1, class1]
 df_temp = pd.concat(frames)
 
@@ -47,7 +45,7 @@ df_temp.info()
 
 df= shuffle(df_temp)
 
-df.to_csv('creditcardsampling.csv')
+df.to_csv('dataset/creditcardsampling.csv')
 
 sns.countplot('Class', data=df)
 
@@ -145,7 +143,7 @@ new_data=pd.concat([X_reduced,Y],axis=1)
 new_data.head()
 new_data.shape
 
-new_data.to_csv('finaldata.csv')
+new_data.to_csv('dataset/finaldata.csv')
 
 X_train, X_test, y_train, y_test= train_test_split(X_reduced, d_scaled['Class'], test_size = 0.30, random_state = 42)
 
@@ -163,7 +161,7 @@ y_pred_svc=svc.predict(X_test)
 y_pred_svc
 
 type(X_test)
-X_test.to_csv('testing.csv')
+X_test.to_csv('dataset/testing.csv')
 from sklearn.model_selection import GridSearchCV
 parameters = [ {'C': [1, 10, 100, 1000], 'kernel': ['rbf'], 'gamma': [0.1, 1, 0.01, 0.0001 ,0.001]}]
 grid_search = GridSearchCV(estimator = svc,
